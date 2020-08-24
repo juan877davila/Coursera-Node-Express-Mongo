@@ -1,22 +1,21 @@
-const { json } = require("express");
+var mymap = L.map('main_map').setView([3.439156,-76.5339495], 13);
 
-const map = L.map('main_map').setView([-34.601242,-58.3861497],13);
-
-L.titleLayer('https://{s}.title.openstreetmap.org/{z}/{x}/{y}.png',{
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
-L.marker([-34.6012424,-58.3861497]).addTo(map);
-L.marker([-34.596932,-58.3808287]).addTo(map);
-L.marker([-34.599564,-58.3778777]).addTo(map);
+L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+	maxZoom: 18,
+	attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+		'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+		'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+	id: 'mapbox/streets-v11',
+	tileSize: 512,
+	zoomOffset: -1
+}).addTo(mymap);
 
 $.ajax({
-    datatype:"json",
-    url: "api/bicicletas",
-    success: function(result){
-        console.log(result);
-        result.bicicletas.forEach((bici) => {
-            L.marker(bici.ubicacion,{title:bici.id}).addTo(map)
-        });
-    }
-})
+	dataType: 'json',
+	url: 'api/bicicletas',
+	success: function(data) {
+		data.bicicletas.forEach(function(bici) {
+			L.marker(bici.ubicacion, { title: bici.modelo }).addTo(mymap);
+		});
+	}
+});

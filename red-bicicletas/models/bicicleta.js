@@ -31,10 +31,22 @@ Bicicleta.removeById=function(aBiciId){
     }
 }
 
+Bicicleta.updateById = function(aBici) {
+    var aBici = Bicicleta.findById(aBici.id);
+    for (var i = 0; i < Bicicleta.allBicis.length; i++) {
+        if (Bicicleta.allBicis[i].id == aBici.id) {
+            Bicicleta.allBicis[i] = aBici;
+            break;
+        }
+    }
+}
+
+/*
 const a = new Bicicleta(1,'rojo','urbana',[-34.6012424,-58.3861497]);
 const b = new Bicicleta(2,'blanco','urbana',[-34.596932,-58.3808287]);
 
 Bicicleta.add(a);
 Bicicleta.add(b);
+*/
 
 module.exports = Bicicleta;
