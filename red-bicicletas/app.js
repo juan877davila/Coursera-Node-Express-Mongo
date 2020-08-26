@@ -11,13 +11,13 @@ var bicicletasAPIRouter = require('./routes/API/bicicletas');
 
 var app = express();
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb://localhost/red_bicicletas';
+var mongoDB = 'mongodb://coursera:coursera2020@cluster0-shard-00-00.la9b4.mongodb.net:27017,cluster0-shard-00-01.la9b4.mongodb.net:27017,cluster0-shard-00-02.la9b4.mongodb.net:27017/red_bicicletas?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority'
 mongoose.connect(mongoDB,{useNewUrlParser:true , useUnifiedTopology:true});
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error',console.error.bind(console,'MongoBD conection error: '));
 
-// view engine setup
+// view engine setupclear
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
