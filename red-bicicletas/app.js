@@ -10,6 +10,12 @@ var bicicletasRouter = require('./routes/bicicletas');
 var bicicletasAPIRouter = require('./routes/API/bicicletas'); 
 
 var app = express();
+var mongoose = require('mongoose');
+var mongoDB = 'mongodb://localhost/red_bicicletas';
+mongoose.connect(mongoDB,{useNewUrlParser:true});
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error',console.error.bind(console,'MongoBD conection error: '));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
