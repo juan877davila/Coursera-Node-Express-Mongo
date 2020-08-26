@@ -28,14 +28,6 @@ describe('Testing Usuarios',function(){
     });
   
     describe('Cuando un usuario reserva una bici', () => {
-        /*
-        it('comienza vacia',(done) => {
-            Bicicleta.allBicis(function(err, bicis){
-                expect(bicis.length).toBe(0);
-                done();
-            });
-        });
-        */
         it('debe existir la reserva', (done) => {
             const usuario = new Usuario({nombre: 'Nestor'});
             usuario.save();
@@ -43,9 +35,7 @@ describe('Testing Usuarios',function(){
             bicicleta.save();          
             var hoy = new Date();
             var manana = new Date();
-            manana.setDate(hoy.getDate()+1);
-            //console.log(bicicleta.id);
-            //done();          
+            manana.setDate(hoy.getDate()+1);      
             usuario.reservar(bicicleta.id, hoy, manana, function(err, reserva){
                 Reserva.find({}).populate('bicicleta').populate('usuario').exec(function(err, reservas){
                     console.log(reservas[0].usuario.nombre);
