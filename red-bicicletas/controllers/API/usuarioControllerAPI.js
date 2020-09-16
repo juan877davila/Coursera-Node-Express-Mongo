@@ -1,32 +1,29 @@
-var Usuario = require('../../models/usuario');
+var User = require('./../../models/usuario');
 
-
-exports.usuarios_list = function(req, res){
-    Usuario.find({}, function(err, usuarios){
+exports.user_list = (req, res) => {
+    User.find({}, (err, users) => {
         res.status(200).json({
-            usuarios: usuarios
+            'usuarios': users
         });
     });
 };
 
+exports.user_create = (req, res) => {
+    var user = new User({ nombre: req.body.nombre });
 
-exports.usuarios_create = function(req, res){
-    var usuario = new Usuario({nombre: req.body.nombre});
-
-    usuario.save(function(err){
-        res.status(200).json(usuario);
-        console.log('Salida creacion usuario:' + err);
+    user.save((err) => {
+        res.status(200).json(user);
     });
-
 };
 
-exports.usuario_reservar = function(req, res){
-    Usuario.findById(req.body.id, function(err, usuario){
-        console.log(usuario);
-        usuario.reservar(req.body.bici_id, req.body.desde, req.body.hasta, function(err){
-            console.log('reserva !!!!!');
+exports.user_reserve = (req, res) => {
+    User.findById(req.body.id, (err, user) => {
+        console.log(user);
+
+        user.reserve(req.body.biciId, req.body.since, req.body.until, (err) => {
+            console.log('reservada');
+
             res.status(200).send();
-            //res.status(200).json(usuario);
         });
     });
-}; 
+};
