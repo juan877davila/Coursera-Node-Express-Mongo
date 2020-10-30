@@ -1,0 +1,41 @@
+extend ../layout
+
+block content
+    section#Contenido
+      .container
+        .row
+          .col-lg-12.text-center
+            h1 Lista de Reservas
+            hr.star-primary            
+        .row
+          a.btn.btn-primary(href='/reservas/create') Crear Reserva
+          hr
+          .col-lg-12(style="overflow-x:auto;")
+            table.table
+                thead
+                    tr
+                      th(scope='col') Id
+                      th(scope='col') Usuario
+                      th(scope='col') Bicicleta
+                      th(scope='col') Desde
+                      th(scope='col') Hasta
+                      th(scope='col') Gestión
+                tbody
+                    each reserva in reservas
+                        tr
+                            td(scope='row')
+                              = reserva._id
+                            td= reserva.usuario.nombre
+                            td= reserva.bicicleta.modelo
+                            td= reserva.desde
+                            td= reserva.hasta
+                            td   
+                              .col-sm-4                           
+                                a.btn.btn-warning(href='/reservas/update/' + reserva._id) Editar                              
+                              .col-sm-4                              
+                                a.btn.btn-primary(href='/reservas/detail/' + reserva._id) Detalle
+                              .col-sm-4
+                                form.inline(method='post' action='reservas/delete/' + reserva._id)
+                                  input(type="hidden" name='id' value=reserva._id)
+                                  button.link-button(type='submit' name='submit_param' value='submit_value' class='btn btn-danger')
+                                    = 'Eliminar'

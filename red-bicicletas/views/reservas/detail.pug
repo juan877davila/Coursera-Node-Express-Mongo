@@ -1,0 +1,40 @@
+extends ../layout
+
+block content
+    section#Contenido
+      .container
+        .row
+            .col-lg-12.text-center
+                h2  Detalle de Reserva
+                hr.star-primary                
+            .row
+            .col-lg-12       
+                a.btn.btn-primary(href='/reservas') Listar reservas
+                hr
+                form
+                    .form-group.row
+                        label.col-sm-2.col-form-label Identificador:
+                        .col-sm-10
+                            p#id(name='id') 
+                                =reserva._id
+                    .form-group.row
+                        label.col-sm-2.col-form-label Usuario:
+                        .col-sm-10
+                            p#userId(name='userId' ) 
+                                =reserva.usuario.nombre
+                    .form-group.row
+                        label.col-sm-2.col-form-label Bicicleta:
+                        .col-sm-10
+                            p#biciId(name='biciId' ) 
+                                =reserva.bicicleta.modelo
+                    .form-group.row
+                        label.col-sm-2.col-form-label Desde:
+                        .col-sm-10
+                            p#desde(name='desde') 
+                                =reserva.desde
+                    .form-group.row
+                        label.col-sm-2.col-form-label Hasta:
+                        .col-sm-10
+                            p#hasta(name='hasta' ) 
+                                =reserva.hasta
+                    a.btn.btn-warning(href='/reservas/update/' + reserva._id) Editar
